@@ -32,8 +32,9 @@ do
 	exit 2
     fi 
     PULL_MSG_FILE="${PULL_MSG_DIR}/${1}-result-git-pull.sh.txt"
-# temp fix, remove old result file in each directory!!! 
-    rm git-pull.sh.result.txt
+#
+# temp fix, remove old result file in each directory! 
+#    rm git-pull.sh.result.txt
 #
     N_DIR=$((N_DIR+1))
     echo -e "\n### LOOP=${N_DIR}, AT `pwd`"
