@@ -2,21 +2,25 @@
 #
 
 source ~/bin/ansi-color.sh
+if [ $? -ne 0 ] ; then 
+    echo -e "\nERROR: 'source ~/bin/ansi-color.sh' failed!\n" 
+    exit 1
+fi 
+
 ATTN_COLOR="${ANSI_YELLOW}"
 
 N_DIR=0 
 N_UPDATE=0
-#PULL_MSG_DIR="/home/kchen/GIT-PULL-MSG"
-PULL_MSG_DIR="./"
+PULL_MSG_DIR="/home/kchen/GIT-PULL-MSG"
+#PULL_MSG_DIR="./"
 
-PULL_MSG_FILE="${PULL_MSG_DIR}/git-pull.sh.result.txt"
 ALREADY_UPDATED_MSG="Already up to date."
 
-#mkdir -p ${PULL_MSG_DIR}
-#if [ $? -ne 0 ] ; then 
-#    echo -e "ERROR: 'mkdir -p ${PULL_MSG_DIR}' failed!\n" 
-#    exit 1
-#fi 
+mkdir -p ${PULL_MSG_DIR}
+if [ $? -ne 0 ] ; then 
+    echo -e "ERROR: 'mkdir -p ${PULL_MSG_DIR}' failed!\n" 
+    exit 1
+fi 
 
 while [ ! -z "${1}" ] ; 
 do
@@ -27,6 +31,10 @@ do
 	echo -e "ERROR: 'cd ${1}' failed!\n" 
 	exit 2
     fi 
+    PULL_MSG_FILE="${PULL_MSG_DIR}/${1}-result-git-pull.sh.txt"
+# temp fix, remove old result file in each directory!!! 
+    rm git-pull.sh.result.txt
+#
     N_DIR=$((N_DIR+1))
     echo -e "\n### LOOP=${N_DIR}, AT `pwd`"
     git pull --rebase > ${PULL_MSG_FILE}
