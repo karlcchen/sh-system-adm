@@ -46,10 +46,11 @@ do
     	N_UPDATE=$((N_UPDATE+1))
 	echo -e "${ATTN_COLOR}"
 	cat ${PULL_MSG_FILE}
-	echo -e "${ANSI_NO_COLOR}"
     else
+    	echo -e "${ANSI_GREEN}"
 	cat ${PULL_MSG_FILE}
     fi 
+    echo -e "${ANSI_NO_COLOR}"
     shift 1
     popd >/dev/null
 done 
