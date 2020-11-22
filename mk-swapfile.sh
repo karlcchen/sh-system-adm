@@ -3,9 +3,13 @@
 # mk-swapfile.sh 
 #
 
-
+SWAP_SIZE="128G"
+if [ ! "$1" = "" ] ; then 
+	SWAP_SIZE="$1"
+fi
+#
 if [ ! -e "/swapfile" ] ; then  
-	sudo fallocate -l 128G /swapfile
+	sudo fallocate -l ${SWAP_SIZE} /swapfile
 #
 # If faillocate is not installed or if you get an error message saying fallocate failed: 
 # Operation not supported then you can use the following command to create the swap file:
