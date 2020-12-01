@@ -14,7 +14,7 @@ fi
 
 NEW_USER="$1"
 LOOP=0
-while [ ! "${NEW_USER}" = "" ] ; 
+while [[ ! "${NEW_USER}" == "" ]] ; 
 do 
     LOOP=$((LOOP+1))
     if [ ${b_DEL_USER} -ne 0 ] ; then 
@@ -24,15 +24,16 @@ do
             read -p " Are you sure? (Yes/No/Skip)" -n 1 -r
             echo    # (optional) move to a new line
             printf '\nINFO: REPLY=%s\n' "${REPLY}"
+            # 
             if [[ ! ${REPLY} =~ ^[YySs]$ ]] ; then
-                if [ "$0" = "${BASH_SOURCE}" ] ; then 
+                if [[ "$0" == "${BASH_SOURCE}" ]] ; then 
                     printf '\n aborted this shell script: %s !\n' "$0"
                     exit 10
                 else
                     printf '\n return from this shell script: %s\n' "$0"
                     return 1
                 fi         
-            elif [ "${REPLY}" = "Y" -o "${REPLY}" = "y" ] ; then 
+            elif [[ ${REPLY} =~ ^[Yy]$ ]] ; then 
                 sudo userdel ${NEW_USER}
                 if [ $? -eq 0 ] ; then 
                     printf '\nERROR-11: sudo userdel %s failed!\n' "${NEW_USER}"

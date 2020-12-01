@@ -11,7 +11,14 @@ WHOAMI=`whoami`
 if [ "${WHOAMI}" = "root" ] ; then 
     SUDO_CMD=""  
 else
-    SUDO_CMD="sudo"
+    SUDO_CMD=""  
+    sudo chmod a+rw /dev/ttyUSB*
+    sudo chmod 755 /run/screen
+    sudo rm -fr /var/run/screen/*
+#
+# old method, using sudo 
+#    SUDO_CMD="sudo"
+#
 fi
 
 SCR_LS=`${SUDO_CMD} screen -ls`
@@ -27,8 +34,11 @@ fi
 SCREENRC_FILE=""/etc/screenrc.d/usbcon-screenrc""
 
 if [ -f "${SCREENRC_FILE}" ] ; then 
-    ${SUDO_CMD} screen -c ${SCREENRC_FILE} -d -m
+#
+#    ${SUDO_CMD} screen -c ${SCREENRC_FILE} -d -m
+#
+    screen -c ${SCREENRC_FILE} -d -m -S shared
 else
-    printf "ERROR1: cannot find file: %s" "${SCREENRC_FILE}"
+    printf "ERROR-01: cannot find file: %s" "${SCREENRC_FILE}"
     exit 1
 fi
