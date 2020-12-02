@@ -47,7 +47,7 @@ fi
 
 # if /usr/bin/screen has sticky bit set, then 755 will be good
 # otherwise, need 777 
-# sudo chmod 755 /run/screen
+sudo chmod 755 /run/screen
 if [[ $? -ne 0 ]]; then 
     printf '\nERROR-4: chmod 755 %s failed!\n' "/run/screen"
     exit 4
