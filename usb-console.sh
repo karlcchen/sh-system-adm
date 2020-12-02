@@ -8,6 +8,9 @@
 # then reboot the machine to take effect 
 # > sudo reboot
 #
+# also set "/usr/bin/screen" with "suid" root 
+# > sudo chmod +s /usr/bin/screen 
+#
 
 EXE_NAME=`realpath $0`
 EXE_DIR=`dirname ${EXE_NAME}`
@@ -44,7 +47,7 @@ fi
 
 # if /usr/bin/screen has sticky bit set, then 755 will be good
 # otherwise, need 777 
-sudo chmod 755 /run/screen
+# sudo chmod 755 /run/screen
 if [[ $? -ne 0 ]]; then 
     printf '\nERROR-4: chmod 755 %s failed!\n' "/run/screen"
     exit 4
