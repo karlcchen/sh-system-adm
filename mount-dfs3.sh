@@ -6,7 +6,8 @@
 USER_NAME="kchen"
 PASSWORD="GeeZan5023$"
 #SRC_IP="10.50.128.91"
-SRC_IP="10.203.20.242"
+#SRC_IP="10.203.20.242"
+SRC_IP="dfs3.sv.us.sonicwall.com"
 MNT_BASE="/home/kchen"
 SUDO="sudo" 
 
@@ -15,16 +16,16 @@ SRC_DIR="${SRC_IP}/Engineering Public"
 MNT_DIR="${MNT_BASE}/mnt/winshare/dfs3-eng-public"
 mkdir -p ${MNT_DIR}
 if [ $? -ne 0 ] ; then 
-    printf 'ERROR-1: mkdir %s failed!\n' "${MNT_DIR}"
+    printf '\nERROR-1: mkdir %s failed!\n' "${MNT_DIR}"
     exit 1
 fi
 ${SUDO} mount -t cifs -o username=${USER_NAME},password=${PASSWORD} //"${SRC_DIR}" ${MNT_DIR}
 if [ $? -ne 0 ] ; then 
-    printf 'ERROR-2 mount cifs source dir: %s failed!\n' "${SRC_DIR}" 
+    printf '\nERROR-2 mount cifs source dir: \"//%s\" on \"%s\" failed!\n' "${SRC_DIR}" "${MNT_DIR}"
     exit 2
 fi
 if [ ! -d "${MNT_DIR}/${USER_NAME}" ] ; then 
-    printf 'ERROR-3: cannot find mounted dir %s\n' "${MNT_DIR}/${USER_NAME}"  
+    printf '\nERROR-3: cannot find mounted dir %s\n' "${MNT_DIR}/${USER_NAME}"  
     exit 3
 fi
 
@@ -41,5 +42,6 @@ if [ $? -ne 0 ] ; then
     printf 'ERROR-5: mount cifs source dir: %s failed!\n' "${SRC_DIR}" 
     exit 5
 fi
+printf '\nINFO: mounted CIFS \"//%s\" on DIR \"%s\"\n' "${SRC_DIR}" "${MNT_DIR}"
 
 
