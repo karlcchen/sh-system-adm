@@ -6,8 +6,8 @@
 USER_NAME="kchen"
 PASSWORD="GeeZan5023$"
 #SRC_IP="10.50.128.91"
-#SRC_IP="10.203.20.242"
-SRC_IP="dfs3.sv.us.sonicwall.com"
+SRC_IP="10.203.20.242"
+#SRC_IP="dfs3.sv.us.sonicwall.com"
 MNT_BASE="/home/kchen"
 SUDO="sudo" 
 
